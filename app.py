@@ -92,7 +92,7 @@ def process_user(account):
             #Do a request
             dp_msg = {'yolo':'SWAG'}
             requests.post('https://hooks.zapier.com/hooks/catch/29888/ny2bmr/', data=json.dumps(dp_msg))
-            dp_msg = {'420 blazit': repr(entry.path_lower) }
+            dp_msg = {'420 blazit': str(entry.path_lower) }
             requests.post('https://hooks.zapier.com/hooks/catch/29888/ny2bmr/', data=json.dumps(dp_msg))
 
             # Convert to Markdown and store as <basename>.html
