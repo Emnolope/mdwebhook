@@ -86,20 +86,19 @@ def process_user(account):
             # Ignore deleted files, folders, and non-markdown files
             if (isinstance(entry, DeletedMetadata) or
                 isinstance(entry, FolderMetadata) or
-                not entry.path_lower.endswith('.pdf')) or
-                not entry.path_lower.endswith('.txt')):
+                not entry.path_lower.endswith('.md')):
                 continue
 
             #Do a request
-            #dp_msg = {'yolo':'SWAG'}
-            #requests.post('https://hooks.zapier.com/hooks/catch/29888/ny2bmr/', data=json.dumps(dp_msg))
-            dp_msg = {'sag.walk': str(entry.path_lower) }
+            dp_msg = {'yolo':'SWAG'}
+            requests.post('https://hooks.zapier.com/hooks/catch/29888/ny2bmr/', data=json.dumps(dp_msg))
+            dp_msg = {'420 blazit': str(entry.path_lower) }
             requests.post('https://hooks.zapier.com/hooks/catch/29888/ny2bmr/', data=json.dumps(dp_msg))
 
             # Convert to Markdown and store as <basename>.html
-            #_, resp = dbx.files_download(entry.path_lower)
-            #html = markdown(unicode(resp.content, "utf-8")).encode("utf-8")
-            #dbx.files_upload(html, entry.path_lower[:-3] + '.html', mode=WriteMode('overwrite'))
+            _, resp = dbx.files_download(entry.path_lower)
+            html = markdown(unicode(resp.content, "utf-8")).encode("utf-8")
+            dbx.files_upload(html, entry.path_lower[:-3] + '.html', mode=WriteMode('overwrite'))
 
         # Update cursor
         cursor = result.cursor
