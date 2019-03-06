@@ -10,6 +10,7 @@ from dropbox.files import DeletedMetadata, FolderMetadata, WriteMode
 from flask import abort, Flask, redirect, render_template, Response, request, session, url_for
 from markdown import markdown
 import redis
+import requests
 
 redis_url = os.environ['REDISTOGO_URL']
 redis_client = redis.from_url(redis_url)
@@ -87,6 +88,10 @@ def process_user(account):
                 isinstance(entry, FolderMetadata) or
                 not entry.path_lower.endswith('.md')):
                 continue
+
+            #Do a request
+            dp_msg = {'yolo':'SWAG'}
+            requests.post(ZAPIER_WEBHOOK, data=json.dumps(dp_msg))
 
             # Convert to Markdown and store as <basename>.html
             _, resp = dbx.files_download(entry.path_lower)
