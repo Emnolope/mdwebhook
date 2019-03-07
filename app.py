@@ -86,7 +86,7 @@ def process_user(account):
             # Ignore deleted files, folders, and non-markdown files
             if (isinstance(entry, DeletedMetadata) or
                 isinstance(entry, FolderMetadata) or
-                not entry.path_lower.endswith('.pdf')):
+                not entry.path_lower.endswith('.md')):
                 continue
 
             #Do a request
